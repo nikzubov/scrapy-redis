@@ -5,6 +5,8 @@ from my_spider.items import JokeItem
 
 
 class MainSpider(CrawlSpider):
+    """Базовый паук. Переходит по ссылкам категорий
+    и страниц, забирает текст из 'holder-body' объектов"""
     name = "main_spider"
     allowed_domains = ["anekdoty.ru"]
     start_urls = ["https://anekdoty.ru"]

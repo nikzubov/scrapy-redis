@@ -5,6 +5,7 @@ from my_spider.config import settings
 
 
 class RedisPipeline:
+    """Основной пайплайн отправляющий спарсенные строки в redis"""
     key = '%(spider)s:items'
 
     def open_spider(
@@ -19,7 +20,7 @@ class RedisPipeline:
         spider
     ):
         return deferToThread(self._process_item_in_thread, item, spider)
-    
+
     def _process_item_in_thread(self, item, spider):
         key = self.key % {'spider': spider.name}
         self.client.rpush(key, item['text'])
